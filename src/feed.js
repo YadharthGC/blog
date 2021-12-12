@@ -18,7 +18,7 @@ function Feed() {
 
   let fetchfeeds = async () => {
     try {
-      let geta = await axios.get("http://localhost:3003/allnews", {
+      let geta = await axios.get("https://yadharthblog.herokuapp.com/allnews", {
         headers: {
           Authorization: window.localStorage.getItem("app_token"),
         },

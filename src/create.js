@@ -39,7 +39,7 @@ function Create() {
                   console.log(title, content, url);
                   navigate("/profile", { replace: true });
                   await axios.post(
-                    "http://localhost:3003/feed",
+                    "https://yadharthblog.herokuapp.com/feed",
                     {
                       title,
                       content,

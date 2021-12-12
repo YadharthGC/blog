@@ -33,12 +33,14 @@ function Page(props) {
   let fetch = async () => {
     try {
       let did = params.id;
-      let post = await axios.post("http://localhost:3003/id", { did });
+      let post = await axios.post("https://yadharthblog.herokuapp.com/id", {
+        did,
+      });
     } catch (error) {}
   };
   let fetchid = async () => {
     try {
-      let get = await axios.get("http://localhost:3003/getid");
+      let get = await axios.get("https://yadharthblog.herokuapp.com/getid");
       console.log(get);
       seturl(get.data[0].url);
       settitle(get.data[0].title);

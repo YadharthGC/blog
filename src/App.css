@@ -154,6 +154,17 @@
 /* /////////////////////
 ///////////Profile//////// */
 
+.profilebox {
+    color: white!important;
+}
+
+.Profilepage {
+    background-image: url(./images/b2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-top: -1%;
+}
+
 .proimg {
     height: 301px;
     width: 350px;

@@ -115,19 +115,22 @@ function Profile() {
         </nav>
       </div>
       <div className="Profilepage">
-        <div className="profilebox">
+        <div className="profilebox" style={{ marginTop: "0%" }}>
           <div className="row" id="feedrow">
             <div className="col-lg-3" id="four">
-              <img src="./images/r1.jpg" className="proimg" />
+              <img
+                src="https://thumbs.dreamstime.com/b/default-avatar-profile-image-vector-social-media-user-icon-potrait-182347582.jpg"
+                className="proimg"
+              />
             </div>
             <div className="col-lg-9" id="eight">
               <div>
-                <span className="pro_keyans">
+                <span className="pro_keyans" style={{ color: "white" }}>
                   <u>{name}</u>
                 </span>
               </div>
               <div className="prodob">{dob}</div>
-              <div className="detail">
+              {/* <div className="detail">
                 I am Hari Yadharth GC from Kovilpatti,Thoothukudi district. I
                 graduated engineering with 86% , HSC with 92% and SSLC 94%. I am
                 graduated from Dr.Mahalingam college of engineering and
@@ -144,7 +147,7 @@ function Profile() {
                 fine with the other two languages, English and Telugu. Last but
                 not least i love travelling and i use to play badminton for my
                 health.
-              </div>
+              </div> */}
               <div>
                 <InstagramIcon id="proinsta" />
                 <TwitterIcon id="protwitter" />

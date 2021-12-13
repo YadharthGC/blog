@@ -75,6 +75,26 @@
 /* /////////////////////
 ///////////FEEDS//////// */
 
+.Feed {
+    background-color: #1D1D1D;
+}
+
+#logout {
+    min-width: 0px !important;
+    width: 68px!important;
+}
+
+#logoutbtn {
+    border: none;
+    background-color: white;
+}
+
+.blogzone {
+    font-family: 'Luxurious Script', cursive;
+    font-weight: bolder;
+    font-size: 40px;
+}
+
 .feedpage {
     background-image: url(./images/b2.jpg);
     background-repeat: no-repeat;
@@ -83,7 +103,7 @@
 
 .blogstyle {
     color: white;
-    font-family: 'Cinzel', serif;
+    font-family: 'Luxurious Script', cursive;
     font-size: 60px;
     margin: 1%;
     margin-top: 0;
@@ -94,47 +114,46 @@
 }
 
 #navbar {
-    background-color: #070D25!important;
+    background-color: black!important;
     color: white!important;
-    border-bottom: solid #294074;
+    /* border-bottom: solid #294074; */
 }
 
 .feedimg {
-    height: 250px;
+    height: 434px;
     width: 100%;
     object-fit: cover;
-    border-bottom: white;
 }
 
 .feedpost {
     display: flex;
-    justify-content: flex-start;
-    align-items: center;
     flex-wrap: wrap;
-    margin: 1%;
-    column-gap: 4%;
-    row-gap: 15px;
-    padding-bottom: 2%;
-    /* padding-left: 11.5%; */
+    column-gap: 59px;
+    row-gap: 20px;
+    width: 100%;
 }
 
 .feedpart {
-    border: solid 5px white;
     border-radius: 4px;
     width: 327px;
     color: white !important;
 }
 
-.title {
-    font-family: 'Playfair Display', serif;
-    font-weight: 800;
+#title {
+    font-family: 'Baloo Bhaijaan 2', cursive;
+    font-weight: normal;
     font-size: 20px;
+    text-align: center;
 }
 
 .time {
     font-size: 15px;
     color: white;
     font-family: 'Josefin Sans', sans-serif;
+}
+
+.author {
+    text-align: center;
 }
 
 .author_key {
@@ -180,7 +199,7 @@
 }
 
 #eight {
-    border: solid 2px green;
+    /* border: solid 2px green; */
     margin: 0%;
     padding: 0;
 }
@@ -189,11 +208,33 @@
     margin: 1%;
 }
 
+.Page {
+    background-color: #1D1D1D;
+    padding-bottom: 10%;
+}
+
 .detail {
     /* font-family: 'Playfair Display', serif; */
     font-family: 'EB Garamond', serif;
     font-size: 20px;
     /* font-weight: 900; */
+}
+
+@media (min-width: 576px) {
+    #feedpage {
+        max-width: 100%;
+    }
+}
+
+#feedpage {
+    /* border: solid 1px rgb(221, 43, 43); */
+}
+
+#feed,
+#profile {
+    font-family: 'EB Garamond', serif;
+    font-size: 15px;
+    color: white;
 }
 
 .pro_key {
@@ -205,7 +246,7 @@
 .pro_keyans {
     font-family: 'Cinzel', serif;
     font-weight: bolder;
-    color: black;
+    color: white;
     font-size: 20px;
 }
 
@@ -232,21 +273,35 @@
 /* /////////////////////
 ///////////Page//////// */
 
+#eleven {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 .eightrow {
     display: flex;
 }
 
 .pagecontent {
-    border: solid;
+    border: solid 1px white;
+    color: white;
     margin: 1%;
     font-family: 'EB Garamond', serif;
     font-size: 20px;
 }
 
 .pageimg {
-    height: 100px;
-    width: 100%;
-    object-fit: cover;
+    height: 332px;
+    width: 518px;
+    object-fit: contain;
+}
+
+#twelve {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .pagepart {

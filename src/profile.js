@@ -26,7 +26,7 @@ function Profile() {
 
   let fetch = async () => {
     try {
-      let get = await axios.get("https://yadharthblog.herokuapp.com/profile");
+      let get = await axios.get("http://localhost:3003/profile");
       console.log(get);
       setname(get.data.name);
       setmail(get.data.mail);
@@ -38,7 +38,7 @@ function Profile() {
 
   let fetchfeeds = async () => {
     try {
-      let geta = await axios.get("https://yadharthblog.herokuapp.com/news", {
+      let geta = await axios.get("http://localhost:3003/news", {
         headers: {
           Authorization: window.localStorage.getItem("app_token"),
         },
@@ -54,7 +54,88 @@ function Profile() {
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
           <div class="container-fluid">
             <a class="navbar-brand" href="#" style={{ color: "white" }}>
-              Blog
+              <span className="blogzone">Blogzone</span>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+              style={{ color: "white" }}
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                  <a class="nav-link active" aria-current="page" href="#">
+                    <Link to="/feed" style={{ textDecoration: "none" }}>
+                      <span style={{ color: "white" }} id="feed">
+                        Feed
+                      </span>
+                    </Link>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">
+                    <Link to="/profile" style={{ textDecoration: "none" }}>
+                      <span style={{ color: "white" }} id="profile">
+                        Profile
+                      </span>
+                    </Link>
+                  </a>
+                </li>
+              </ul>
+              <form class="d-flex">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <span id="profile"> Name</span>
+                    </a>
+                    <ul
+                      class="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                      style={{ minWidth: "0px" }}
+                      id="logout"
+                    >
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          href="#"
+                          style={{ padding: "0px" }}
+                        >
+                          <button
+                            id="logoutbtn"
+                            onClick={() => {
+                              window.localStorage.removeItem("app_token");
+                              navigate("/", { repalce: true });
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </form>
+            </div>
+          </div>
+        </nav>
+        {/* <nav id="navbar" class="navbar navbar-expand-lg navbar-light bg-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#" style={{ color: "white" }}>
+              <span className="blogzone">Blogzone</span>
             </a>
             <button
               class="navbar-toggler"
@@ -72,29 +153,80 @@ function Profile() {
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">
                     <Link to="/feed" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "white" }}> Feed</span>
+                      <span style={{ color: "white" }} id="feed">
+                        {" "}
+                        Feed
+                      </span>
                     </Link>
                   </a>
+                </li>
+                <li class="nav-item dropdown">
+                  <a
+                    class="nav-link dropdown-toggle"
+                    href="#"
+                    id="navbarDropdown"
+                    role="button"
+                    data-toggle="dropdown"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                  >
+                    Dropdown
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">
+                      Action
+                    </a>
+                    <a class="dropdown-item" href="#">
+                      Another action
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                      Something else here
+                    </a>
+                  </div>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <Link to="/profile" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "white" }}>Profile</span>
+                      <span style={{ color: "white" }} id="profile">
+                        Profile
+                      </span>
                     </Link>
                   </a>
                 </li>
               </ul>
               <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                      <InstagramIcon style={{ color: "white" }} />
-                    </a>
-                  </li>
+                 
                   <li class="nav-item">
                     <a class="nav-link" href="#">
-                      <TwitterIcon style={{ color: "white" }} />
+                      <Avatar />
                     </a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                    >
+                      <Avatar />
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="#">
+                        Action
+                      </a>
+                      <a class="dropdown-item" href="#">
+                        Another action
+                      </a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">
+                        Something else here
+                      </a>
+                    </div>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">
@@ -112,7 +244,7 @@ function Profile() {
               </form>
             </div>
           </div>
-        </nav>
+        </nav> */}
       </div>
       <div className="Profilepage">
         <div className="profilebox" style={{ marginTop: "0%" }}>

@@ -69,9 +69,9 @@ function Login() {
           >
             <u>New member?</u>
           </div>
-          <div className="already">
+          {/* <div className="already">
             <u>ADMIN?</u>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

@@ -19,7 +19,7 @@ function Feed() {
 
   let fetchfeeds = async () => {
     try {
-      let geta = await axios.get("http://localhost:3003/allnews", {
+      let geta = await axios.get("https://yadharthblog.herokuapp.com/allnews", {
         headers: {
           Authorization: window.localStorage.getItem("app_token"),
         },
@@ -44,8 +44,12 @@ function Feed() {
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              style={{ backgroundColor: "white" }}
             >
-              <span class="navbar-toggler-icon"></span>
+              <span
+                class="navbar-toggler-icon"
+                style={{ backgroundColor: "white" }}
+              ></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">

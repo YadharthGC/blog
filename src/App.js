@@ -10,6 +10,8 @@ import Feed from "./feed";
 import Profile from "./profile";
 import Page from "./page";
 import Create from "./create";
+import Setpic from "./setpic";
+import Aboutme from "./aboutme";
 
 function App() {
   return (
@@ -21,6 +23,9 @@ function App() {
           <Route path="/feed" element={<Feed />} exact={true} />
           <Route path="/profile" element={<Profile />} exact={true} />
           <Route path="/page/:id" element={<Page />} exact={true} />
+          <Route path="/create" element={<Create />} exact={true} />
+          <Route path="/setpic/:id" element={<Setpic />} exact={true} />
+          <Route path="/aboutme/:id" element={<Aboutme />} exact={true} />
           <Route path="/create" element={<Create />} exact={true} />
         </Routes>
       </Router>

@@ -5,62 +5,32 @@ import { useState, useEffect } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import axios from "axios";
-import EditIcon from "@mui/icons-material/Edit";
+import { storage } from "./firebase";
 import { useParams } from "react-router-dom";
 
-function Profile() {
-  let date = new Date();
-  let dates = date.toString();
+function Aboutme() {
   const navigate = useNavigate();
-  const [name, setname] = useState("");
-  const [mail, setmail] = useState("");
-  const [dob, setdob] = useState("");
-  const [insta, setinsta] = useState("");
-  const [twitter, settwitter] = useState("");
-  const [datas, setdatas] = useState([]);
-  const [_id, set_id] = useState("");
-  const [propic, setpropic] = useState("");
-  const [content, setcontent] = useState("");
-  const [aboutme, setaboutme] = useState("");
+  const [about, setabout] = useState([]);
   const params = useParams();
   const did = params.id;
 
-  useEffect(() => {
-    fetch();
-  }, []);
-  useEffect(() => {
-    fetchfeeds();
-  }, []);
-
-  let fetch = async () => {
+  let handlesubmit = async (e) => {
     try {
-      let get = await axios.get("https://yadharthblog.herokuapp.com/profile");
-      console.log(get);
-      setname(get.data[0].name);
-      setmail(get.data[0].mail);
-      setdob(get.data[0].dob);
-      setinsta(get.data[0].insta);
-      settwitter(get.data[0].twitter);
-      set_id(get.data[0]._id);
-      setpropic(get.data[0].propic);
-      setaboutme(get.data[0].aboutme);
-    } catch (error) {}
-  };
-
-  let fetchfeeds = async () => {
-    try {
-      let geta = await axios.get("https://yadharthblog.herokuapp.com/news", {
-        headers: {
-          Authorization: window.localStorage.getItem("app_token"),
-        },
-      });
-      setdatas([...geta.data]);
-    } catch (error) {}
+      navigate("/profile", { replace: true });
+      let post = await axios.post(
+        "https://yadharthblog.herokuapp.com/aboutme",
+        {
+          did,
+          about,
+        }
+      );
+    } catch (error) {
+      console.log("error");
+    }
   };
 
   return (
-    <div>
-      <div className="Feed"></div>
+    <div className="Setpic">
       <div className="header">
         <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
           <div class="container-fluid">
@@ -147,82 +117,33 @@ function Profile() {
           </div>
         </nav>
       </div>
-
-      <div className="Profilepage">
-        <div className="profilebox" style={{ marginTop: "0%" }}>
-          <div className="row" id="feedrow">
-            <div className="col-lg-3" id="four">
-              <img src={propic} className="proimg" />
-              <Link to={`/setpic/${_id}`}>
-                <EditIcon id="editicon" />
-              </Link>
-            </div>
-            <div className="col-lg-9" id="eight">
-              <div>
-                <span className="pro_keyans" style={{ color: "white" }}>
-                  {name}
-                </span>
-              </div>
-              <div className="prodob">{dob}</div>
-              <div className="detail">
-                <div>
-                  <u>
-                    About me
-                    <Link to={`/aboutme/${_id}`}>
-                      <EditIcon id="editicon" />
-                    </Link>
-                  </u>
-                </div>
-                <div>{aboutme}</div>
-              </div>
-              <div>
-                <InstagramIcon id="proinsta" />
-                <TwitterIcon id="protwitter" />
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="write">
-          <button
-            onClick={() => {
-              navigate("/create", { replace: true });
+      <div className="setpage">
+        <div className="setbox">
+          <div className="sypp">About me:</div>
+          <form
+            onSubmit={(i) => {
+              handlesubmit(i);
             }}
           >
-            Create a blog+
-          </button>
-        </div>
-        <div className="container" id="feedpage">
-          <div className="blogstyle">Blogs</div>
-          <div className="feedpost">
-            {datas.map((data) => {
-              return (
-                <div className="feedpart">
-                  <div>
-                    <Link
-                      to={`/page/${data._id}`}
-                      style={{ textDecoration: "none" }}
-                    >
-                      <img src={data.url} className="feedimg" />{" "}
-                    </Link>
-                  </div>
-                  <div
-                  // style={{ backgroundColor: "black" }}
-                  >
-                    <div id="title">{data.title}</div>
-                    {/* <div className="author">
-                       <span className="author_key">Author:</span> 
-                      &#40;{data.name}&#41;
-                    </div> */}
-                    <div className="time">{data.dates}</div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
+            <div className="settext">
+              <input
+                type="text"
+                id="settext"
+                placeholder="Tell us about yourself"
+                value={about}
+                onChange={(i) => {
+                  setabout(i.target.value);
+                }}
+              />
+            </div>
+            <div className="setsubmit">
+              <input type="submit" id="setsubmit" />
+            </div>
+          </form>
         </div>
       </div>
     </div>
   );
 }
 
-export default Profile;
+export default Aboutme;

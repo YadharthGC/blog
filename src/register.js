@@ -16,7 +16,7 @@ function Register() {
 
   let handlesubmit = async () => {
     navigate("/", { replace: true });
-    let post = await axios.post("http://localhost:3003/register", {
+    let post = await axios.post("https://yadharthblog.herokuapp.com/register", {
       name,
       mail,
       dob,

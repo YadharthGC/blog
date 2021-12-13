@@ -1,20 +1,18 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { useState, useHistory } from "react";
+import { useState, useEffect } from "react";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
-import { storage } from "./firebase";
 import axios from "axios";
+import { storage } from "./firebase";
+import { useParams } from "react-router-dom";
 
-function Create() {
-  let date = new Date();
-  let dates = date.toString();
+function Setpic() {
   const navigate = useNavigate();
-  const [title, settitle] = useState([]);
   const [image, setimage] = useState(null);
-  const [urls, seturls] = useState([]);
-  const [content, setcontent] = useState([]);
+  const params = useParams();
+  const did = params.id;
 
   let handlesubmit = async (e) => {
     try {
@@ -34,17 +32,13 @@ function Create() {
               .getDownloadURL()
               .then(async (url) => {
                 try {
-                  seturls(url);
                   console.log(url);
-                  console.log(title, content, url);
                   navigate("/profile", { replace: true });
                   await axios.post(
-                    "https://yadharthblog.herokuapp.com/feed",
+                    "https://yadharthblog.herokuapp.com/propic",
                     {
-                      title,
-                      content,
-                      dates,
                       url,
+                      did,
                     },
                     {
                       headers: {
@@ -65,18 +59,19 @@ function Create() {
         }
       );
     } catch (error) {
+      console.log(did);
       console.log("handlesubmit error");
       console.log("error");
     }
   };
 
   return (
-    <div className="Create">
+    <div className="Setpic">
       <div className="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              Navbar
+            <a class="navbar-brand" href="#" style={{ color: "white" }}>
+              <span className="blogzone">Blogzone</span>
             </a>
             <button
               class="navbar-toggler"
@@ -86,49 +81,71 @@ function Create() {
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              style={{ backgroundColor: "white" }}
             >
-              <span class="navbar-toggler-icon"></span>
+              <span
+                class="navbar-toggler-icon"
+                style={{ backgroundColor: "white" }}
+              ></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">
                     <Link to="/feed" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "black" }}> Feed</span>
+                      <span style={{ color: "white" }} id="feed">
+                        Feed
+                      </span>
                     </Link>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <Link to="/profile" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "black" }}>Profile</span>
+                      <span style={{ color: "white" }} id="profile">
+                        Profile
+                      </span>
                     </Link>
                   </a>
                 </li>
               </ul>
               <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                      <InstagramIcon />
+                  <li class="nav-item dropdown">
+                    <a
+                      class="nav-link dropdown-toggle"
+                      href="#"
+                      id="navbarDropdown"
+                      role="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      <span id="profile"> Name</span>
                     </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">
-                      <TwitterIcon />
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                      <button
-                        onClick={() => {
-                          window.localStorage.removeItem("app_token");
-                          navigate("/", { repalce: true });
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </a>
+                    <ul
+                      class="dropdown-menu"
+                      aria-labelledby="navbarDropdown"
+                      style={{ minWidth: "0px" }}
+                      id="logout"
+                    >
+                      <li>
+                        <a
+                          class="dropdown-item"
+                          href="#"
+                          style={{ padding: "0px" }}
+                        >
+                          <button
+                            id="logoutbtn"
+                            onClick={() => {
+                              window.localStorage.removeItem("app_token");
+                              navigate("/", { repalce: true });
+                            }}
+                          >
+                            Logout
+                          </button>
+                        </a>
+                      </li>
+                    </ul>
                   </li>
                 </ul>
               </form>
@@ -136,52 +153,31 @@ function Create() {
           </div>
         </nav>
       </div>
-      <div className="createpage">
-        <div className="write">Create a blog</div>
-        <form
-          onSubmit={(i, e) => {
-            handlesubmit(i, e);
-          }}
-        >
-          <div>
-            <input
-              type="text"
-              id="createtitle"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => {
-                settitle(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <input
-              type="file"
-              id="createphoto"
-              accept=".jpg,.jpeg,.png"
-              onChange={(i) => {
-                setimage(i.target.files[0]);
-              }}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              id="createcontent"
-              placeholder="Content"
-              value={content}
-              onChange={(e) => {
-                setcontent(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <input type="submit" id="submit" value="submit" />
-          </div>
-        </form>
+      <div className="setpage">
+        <div className="setbox">
+          <div className="sypp">Set your Profile pic :</div>
+          <form
+            onSubmit={(i) => {
+              handlesubmit(i);
+            }}
+          >
+            <div className="setfile">
+              <input
+                type="file"
+                id="setfile"
+                onChange={(i) => {
+                  setimage(i.target.files[0]);
+                }}
+              />
+            </div>
+            <div className="setsubmit">
+              <input type="submit" id="setsubmit" />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
 }
 
-export default Create;
+export default Setpic;

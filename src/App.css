@@ -178,9 +178,7 @@
 }
 
 .Profilepage {
-    background-image: url(./images/b2.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #1D1D1D;
     margin-top: -1%;
 }
 
@@ -191,10 +189,9 @@
 }
 
 #four {
-    border: solid;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     /* padding-left: 13%; */
 }
 
@@ -206,6 +203,7 @@
 
 #feedrow {
     margin: 1%;
+    padding-top: 2%;
 }
 
 .Page {
@@ -350,4 +348,67 @@
 #createcontent {
     width: 85%;
     padding-bottom: 25%;
+}
+
+
+/* /////////////////////
+///////////Setpic//////// */
+
+.setpage {
+    background-color: #1D1D1D;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.setbox {
+    background-color: lightgray;
+    border: solid 4px gray;
+}
+
+.sypp {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.setfile {
+    margin-top: 5%;
+    margin-bottom: 2%;
+    margin-left: 16%;
+}
+
+#setfile {
+    text-align: center;
+}
+
+.setsubmit {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+
+#setsubmit {
+    border: none;
+    border: solid 1px black;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+#setfile {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 400;
+}
+
+
+/* /////////////////////
+///////////Aboutme//////// */
+
+#settext {
+    width: 500px;
+    padding-bottom: 280px;
+    color: black !important;
+    font-family: 'Josefin Sans', sans-serif;
 }

@@ -7,11 +7,13 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import axios from "axios";
 import EditIcon from "@mui/icons-material/Edit";
 import { useParams } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Profile() {
   let date = new Date();
   let dates = date.toString();
   const navigate = useNavigate();
+  const [dataz, setdataz] = useState([]);
   const [name, setname] = useState("");
   const [mail, setmail] = useState("");
   const [dob, setdob] = useState("");
@@ -24,32 +26,28 @@ function Profile() {
   const [aboutme, setaboutme] = useState("");
   const params = useParams();
   const did = params.id;
+  const [loading, setloading] = useState(true);
 
   useEffect(() => {
     fetch();
-  }, []);
+  }, [dataz]);
   useEffect(() => {
     fetchfeeds();
-  }, []);
+  }, [datas]);
 
   let fetch = async () => {
     try {
-      let get = await axios.get("https://yadharthblog.herokuapp.com/profile");
+      let get = await axios.get("http://localhost:3003/profile");
       console.log(get);
-      setname(get.data[0].name);
-      setmail(get.data[0].mail);
-      setdob(get.data[0].dob);
-      setinsta(get.data[0].insta);
-      settwitter(get.data[0].twitter);
-      set_id(get.data[0]._id);
-      setpropic(get.data[0].propic);
-      setaboutme(get.data[0].aboutme);
+      setdataz([...get.data]);
+      console.log(dataz);
+      setloading(false);
     } catch (error) {}
   };
 
   let fetchfeeds = async () => {
     try {
-      let geta = await axios.get("https://yadharthblog.herokuapp.com/news", {
+      let geta = await axios.get("http://localhost:3003/news", {
         headers: {
           Authorization: window.localStorage.getItem("app_token"),
         },
@@ -106,40 +104,16 @@ function Profile() {
               <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
-                    <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <span id="profile"> Name</span>
+                    <a class="nav-link" href="#">
+                      <span id="profile">
+                        <LogoutIcon
+                          onClick={() => {
+                            window.localStorage.removeItem("app_token");
+                            navigate("/", { repalce: true });
+                          }}
+                        />
+                      </span>
                     </a>
-                    <ul
-                      class="dropdown-menu"
-                      aria-labelledby="navbarDropdown"
-                      style={{ minWidth: "0px" }}
-                      id="logout"
-                    >
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="#"
-                          style={{ padding: "0px" }}
-                        >
-                          <button
-                            id="logoutbtn"
-                            onClick={() => {
-                              window.localStorage.removeItem("app_token");
-                              navigate("/", { repalce: true });
-                            }}
-                          >
-                            Logout
-                          </button>
-                        </a>
-                      </li>
-                    </ul>
                   </li>
                 </ul>
               </form>
@@ -149,39 +123,46 @@ function Profile() {
       </div>
 
       <div className="Profilepage">
-        <div className="profilebox" style={{ marginTop: "0%" }}>
-          <div className="row" id="feedrow">
-            <div className="col-lg-3" id="four">
-              <img src={propic} className="proimg" />
-              <Link to={`/setpic/${_id}`}>
-                <EditIcon id="editicon" />
-              </Link>
-            </div>
-            <div className="col-lg-9" id="eight">
-              <div>
-                <span className="pro_keyans" style={{ color: "white" }}>
-                  {name}
-                </span>
-              </div>
-              <div className="prodob">{dob}</div>
-              <div className="detail">
-                <div>
-                  <u>
-                    About me
-                    <Link to={`/aboutme/${_id}`}>
+        {dataz.map((datax) => {
+          return (
+            <div>
+              <div className="profilebox" style={{ marginTop: "0%" }}>
+                <div className="row" id="feedrow">
+                  <div className="col-lg-3" id="four">
+                    <img src={datax.propic} className="proimg" />
+                    <Link to={`/setpic/${datax._id}`}>
                       <EditIcon id="editicon" />
                     </Link>
-                  </u>
+                  </div>
+                  <div className="col-lg-9" id="eight">
+                    <div>
+                      <span className="pro_keyans" style={{ color: "white" }}>
+                        {datax.name}
+                      </span>
+                    </div>
+                    <div className="prodob">{datax.dob}</div>
+                    <div className="detail">
+                      <div>
+                        <u>
+                          About me
+                          <Link to={`/aboutme/${datax._id}`}>
+                            <EditIcon id="editicon" />
+                          </Link>
+                        </u>
+                      </div>
+                      <div>{datax.aboutme}</div>
+                    </div>
+                    <div>
+                      <InstagramIcon id="proinsta" />
+                      <TwitterIcon id="protwitter" />
+                    </div>
+                  </div>
                 </div>
-                <div>{aboutme}</div>
-              </div>
-              <div>
-                <InstagramIcon id="proinsta" />
-                <TwitterIcon id="protwitter" />
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
+
         <div className="write">
           <button
             onClick={() => {

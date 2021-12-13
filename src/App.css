@@ -192,6 +192,7 @@
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    border-right: solid 3px white;
     /* padding-left: 13%; */
 }
 
@@ -199,6 +200,7 @@
     /* border: solid 2px green; */
     margin: 0%;
     padding: 0;
+    padding-left: 5px;
 }
 
 #feedrow {
@@ -348,6 +350,24 @@
 #createcontent {
     width: 85%;
     padding-bottom: 25%;
+}
+
+.setfilea {
+    margin-top: 5%;
+    margin-bottom: 2%;
+}
+
+#settitle {
+    color: black !important;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#createset {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1D1D1D;
+    height: 100vh;
 }
 
 

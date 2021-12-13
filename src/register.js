@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Register() {
   const [name, setname] = useState([]);

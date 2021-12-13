@@ -6,6 +6,7 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import { storage } from "./firebase";
 import axios from "axios";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Create() {
   let date = new Date();
@@ -73,10 +74,10 @@ function Create() {
   return (
     <div className="Create">
       <div className="header">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
           <div class="container-fluid">
-            <a class="navbar-brand" href="#">
-              Navbar
+            <a class="navbar-brand" href="#" style={{ color: "white" }}>
+              <span className="blogzone">Blogzone</span>
             </a>
             <button
               class="navbar-toggler"
@@ -86,48 +87,46 @@ function Create() {
               aria-controls="navbarSupportedContent"
               aria-expanded="false"
               aria-label="Toggle navigation"
+              style={{ backgroundColor: "white" }}
             >
-              <span class="navbar-toggler-icon"></span>
+              <span
+                class="navbar-toggler-icon"
+                style={{ backgroundColor: "white" }}
+              ></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                   <a class="nav-link active" aria-current="page" href="#">
                     <Link to="/feed" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "black" }}> Feed</span>
+                      <span style={{ color: "white" }} id="feed">
+                        Feed
+                      </span>
                     </Link>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">
                     <Link to="/profile" style={{ textDecoration: "none" }}>
-                      <span style={{ color: "black" }}>Profile</span>
+                      <span style={{ color: "white" }} id="profile">
+                        Profile
+                      </span>
                     </Link>
                   </a>
                 </li>
               </ul>
               <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                      <InstagramIcon />
-                    </a>
-                  </li>
-                  <li class="nav-item">
+                  <li class="nav-item dropdown">
                     <a class="nav-link" href="#">
-                      <TwitterIcon />
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">
-                      <button
-                        onClick={() => {
-                          window.localStorage.removeItem("app_token");
-                          navigate("/", { repalce: true });
-                        }}
-                      >
-                        Logout
-                      </button>
+                      <span id="profile">
+                        <LogoutIcon
+                          onClick={() => {
+                            window.localStorage.removeItem("app_token");
+                            navigate("/", { repalce: true });
+                          }}
+                        />
+                      </span>
                     </a>
                   </li>
                 </ul>
@@ -136,49 +135,52 @@ function Create() {
           </div>
         </nav>
       </div>
-      <div className="createpage">
-        <div className="write">Create a blog</div>
-        <form
-          onSubmit={(i, e) => {
-            handlesubmit(i, e);
-          }}
-        >
-          <div>
-            <input
-              type="text"
-              id="createtitle"
-              placeholder="Title"
-              value={title}
-              onChange={(e) => {
-                settitle(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <input
-              type="file"
-              id="createphoto"
-              accept=".jpg,.jpeg,.png"
-              onChange={(i) => {
-                setimage(i.target.files[0]);
-              }}
-            />
-          </div>
-          <div>
-            <input
-              type="text"
-              id="createcontent"
-              placeholder="Content"
-              value={content}
-              onChange={(e) => {
-                setcontent(e.target.value);
-              }}
-            />
-          </div>
-          <div>
-            <input type="submit" id="submit" value="submit" />
-          </div>
-        </form>
+
+      <div id="createset">
+        <div className="setbox">
+          <div className="sypp">Create a feed:</div>
+          <form
+            onSubmit={(i, e) => {
+              handlesubmit(i, e);
+            }}
+          >
+            <div className="settitle" style={{ textAlign: "center" }}>
+              <input
+                type="text"
+                placeholder="Title"
+                id="settitle"
+                value={title}
+                onChange={(e) => {
+                  settitle(e.target.value);
+                }}
+              />
+            </div>
+            <div className="setfilea" style={{ textAlign: "center" }}>
+              <input
+                type="file"
+                id="setfile"
+                accept=".jpg,.jpeg,.png"
+                onChange={(i) => {
+                  setimage(i.target.files[0]);
+                }}
+              />
+            </div>
+            <div className="settext">
+              <input
+                type="text"
+                placeholder="Content"
+                id="settext"
+                value={content}
+                onChange={(e) => {
+                  setcontent(e.target.value);
+                }}
+              />
+            </div>
+            <div className="setsubmit">
+              <input type="submit" id="setsubmit" />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );

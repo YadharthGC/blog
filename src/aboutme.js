@@ -7,6 +7,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import axios from "axios";
 import { storage } from "./firebase";
 import { useParams } from "react-router-dom";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 function Aboutme() {
   const navigate = useNavigate();
@@ -76,40 +77,16 @@ function Aboutme() {
               <form class="d-flex">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item dropdown">
-                    <a
-                      class="nav-link dropdown-toggle"
-                      href="#"
-                      id="navbarDropdown"
-                      role="button"
-                      data-bs-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      <span id="profile"> Name</span>
+                    <a class="nav-link" href="#">
+                      <span id="profile">
+                        <LogoutIcon
+                          onClick={() => {
+                            window.localStorage.removeItem("app_token");
+                            navigate("/", { repalce: true });
+                          }}
+                        />
+                      </span>
                     </a>
-                    <ul
-                      class="dropdown-menu"
-                      aria-labelledby="navbarDropdown"
-                      style={{ minWidth: "0px" }}
-                      id="logout"
-                    >
-                      <li>
-                        <a
-                          class="dropdown-item"
-                          href="#"
-                          style={{ padding: "0px" }}
-                        >
-                          <button
-                            id="logoutbtn"
-                            onClick={() => {
-                              window.localStorage.removeItem("app_token");
-                              navigate("/", { repalce: true });
-                            }}
-                          >
-                            Logout
-                          </button>
-                        </a>
-                      </li>
-                    </ul>
                   </li>
                 </ul>
               </form>

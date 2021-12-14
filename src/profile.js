@@ -37,7 +37,7 @@ function Profile() {
 
   let fetch = async () => {
     try {
-      let get = await axios.get("http://localhost:3003/profile");
+      let get = await axios.get("https://yadharthblog.herokuapp.com/profile");
       console.log(get);
       setdataz([...get.data]);
       console.log(dataz);
@@ -47,7 +47,7 @@ function Profile() {
 
   let fetchfeeds = async () => {
     try {
-      let geta = await axios.get("http://localhost:3003/news", {
+      let geta = await axios.get("https://yadharthblog.herokuapp.com/news", {
         headers: {
           Authorization: window.localStorage.getItem("app_token"),
         },
